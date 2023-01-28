@@ -13,3 +13,7 @@ Jelani Garnes (100801696) ~ Programmer / Sound Designer
 Month 1: Jonathan  
 Month 2: Jelani  
 Month 3: Matthew  
+
+**Contribution**  
+
+All team members contributed equally to the entirety of this project.
