@@ -2,7 +2,7 @@
 **Group Members:**   
   
 Matthew McPherson (100757379) ~ Designer  
-&emsp; Skills: Game Design, Mechanics Design, Level Design, Documentation  
+&emsp; Skills: game design, mechanics design, level design, documentation  
 Jonathan Leung (100746578) ~ Digital Artist & 3D Modeler  
 &emsp; Skills: 3D art, Unity  
 Jelani Garnes (100801696) ~ Programmer / Sound Designer  
