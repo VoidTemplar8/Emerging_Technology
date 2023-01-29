@@ -10,9 +10,11 @@ Jelani Garnes (100801696) ~ Programmer / Sound Designer
 
 **Team Leadership:**  
 
-Month 1: Jonathan  
-Month 2: Jelani  
-Month 3: Matthew  
+Month 1: Matthew  
+Month 2: Jonathan  
+Month 3: Jelani  
+
+Matthew was chosen for the first leadership slot because, as the designer, it is optimal for him to lead the intitial parts of the project to ensure that a strong foundation is created for the project.  
 
 **Contribution**  
 
