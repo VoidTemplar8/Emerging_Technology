@@ -8,14 +8,27 @@ Jonathan Leung (100746578) ~ Digital Artist & 3D Modeler
 Jelani Garnes (100801696) ~ Programmer / Sound Designer  
 &emsp; Skills:  programing, sound design  
 
+**Video Links:**  
+  
+Assignment 2:  
+https://www.youtube.com/watch?v=QaZNkVs-NSE  
+
 **Team Leadership:**  
 
 Month 1: Matthew  
 Month 2: Jonathan  
 Month 3: Jelani  
 
-Matthew was chosen for the first leadership slot because, as the designer, it is optimal for him to lead the intitial parts of the project to ensure that a strong foundation is created for the project.  
+**Contributions:**  
+  
+Assignment 2:  
 
-**Contribution**  
+Matthew McPherson: Bodystrom Conductor, Report Writing, Presentation, Persona.  
 
-All team members contributed equally to the entirety of this project.
+Jonathan Leung: Report Writing, Presentation, Persona.  
+
+Jelani Garmes: Mozilla Hub Prototype, Report Writing, Presentation, Persona, Use Case Diagram.  
+
+Assignment 1:  
+
+All team members contributed equally to the entirety of this project.  
