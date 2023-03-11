@@ -18,6 +18,7 @@
  * limitations under the License.
  */
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +28,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class OVRGrabber : MonoBehaviour
 {
+    //NEW: audio clip for haptic which will vibrate the motor
+    public AudioClip hapticAudioClip;
+
     // Grip trigger thresholds for picking up objects, with some hysteresis.
     public float grabBegin = 0.55f;
     public float grabEnd = 0.35f;
@@ -80,6 +84,11 @@ public class OVRGrabber : MonoBehaviour
     protected Quaternion m_grabbedObjectRotOff;
 	protected Dictionary<OVRGrabbable, int> m_grabCandidates = new Dictionary<OVRGrabbable, int>();
 	protected bool m_operatingWithoutOVRCameraRig = true;
+
+    //NEW
+    //private bool isPlaying = false;
+    //[SerializeField] private float hapticDuration = 0.1f;
+    //[SerializeField] private float hapticIntensity = 0.5f;
 
     /// <summary>
     /// The currently grabbed object.
@@ -184,6 +193,21 @@ public class OVRGrabber : MonoBehaviour
         }
     }
 
+    //NEW:
+    //private IEnumerator PlayHapticLoop()
+    //{
+    //    while (isPlaying)
+    //    {
+    //        OVRHapticsClip hapticsClip = new OVRHapticsClip(hapticAudioClip);
+    //        if (m_controller == OVRInput.Controller.LTouch)
+    //            OVRHaptics.LeftChannel.Preempt(hapticsClip);
+
+    //        else
+    //            OVRHaptics.RightChannel.Preempt(hapticsClip);
+    //        yield return hapticDuration;
+    //    }
+    //}
+
     void OnTriggerEnter(Collider otherCollider)
     {
         // Get the grab trigger
@@ -194,6 +218,23 @@ public class OVRGrabber : MonoBehaviour
         int refCount = 0;
         m_grabCandidates.TryGetValue(grabbable, out refCount);
         m_grabCandidates[grabbable] = refCount + 1;
+
+        //NEW: Haptic feedback pulse
+        OVRHapticsClip hapticsClip = new OVRHapticsClip(hapticAudioClip);
+        if (m_controller == OVRInput.Controller.LTouch)
+        {
+            OVRHaptics.LeftChannel.Preempt(hapticsClip);
+        }
+        else
+        if (m_controller == OVRInput.Controller.RTouch)
+        {
+            OVRHaptics.RightChannel.Preempt(hapticsClip);
+        }
+        //if (!isPlaying)
+        //{
+        //    isPlaying = true;
+        //    StartCoroutine(PlayHapticLoop());
+        //}
     }
 
     void OnTriggerExit(Collider otherCollider)
@@ -201,6 +242,7 @@ public class OVRGrabber : MonoBehaviour
 		OVRGrabbable grabbable = otherCollider.GetComponent<OVRGrabbable>() ?? otherCollider.GetComponentInParent<OVRGrabbable>();
         if (grabbable == null) return;
 
+        //isPlaying = false;
         // Remove the grabbable
         int refCount = 0;
         bool found = m_grabCandidates.TryGetValue(grabbable, out refCount);
@@ -216,6 +258,7 @@ public class OVRGrabber : MonoBehaviour
         else
         {
             m_grabCandidates.Remove(grabbable);
+            //isPlaying = false;
         }
     }
 

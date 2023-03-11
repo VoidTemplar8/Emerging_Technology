@@ -4,33 +4,21 @@ using UnityEngine;
 
 public class Match : MonoBehaviour
 {
-    public GameObject[] objectsToMatch;
-    public int matchesNeeded = 3;
-    private int currentMatches = 0;
+    public string targetTag; // the tag of the gameobjects we want to destroy upon collision
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        // Check if the colliding object is one of the objects to match
-        foreach (GameObject obj in objectsToMatch)
+        // check if the collision involves the target tag
+        if (collision.gameObject.CompareTag(targetTag))
         {
-            if (collision.gameObject == obj)
+            // check if the collided object is being held by a controller
+            OVRGrabbable grabbable = collision.gameObject.GetComponent<OVRGrabbable>();
+            if (grabbable != null && grabbable.isGrabbed)
             {
-                // Increase the current matches count
-                currentMatches++;
-
-                // Destroy the matched object
-                Destroy(obj);
-
-                // Check if enough matches have been made
-                if (currentMatches >= matchesNeeded)
-                {
-                    // Do something when enough matches have been made
-                    Debug.Log("Matches made!");
-                    currentMatches = 0; // Reset the matches count
-                }
-
-                break;
+                // if the collided object is being held, destroy it
+                Destroy(collision.gameObject);
             }
+            Destroy(collision.gameObject);
         }
     }
 }
