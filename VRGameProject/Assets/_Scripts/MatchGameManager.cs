@@ -1,54 +1,107 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MatchGameManager : MonoBehaviour
 {
-    public string[] tagsToMatch;
-    public int matchesNeeded = 3;
-    private int currentMatches = 0;
-    private List<GameObject> matchedObjects = new List<GameObject>();
+    public string[] targetTags;
+    public AudioClip correctMatch;
 
-    void OnCollisionEnter(Collision collision)
+    public TextMeshProUGUI countText;
+    private int count;
+
+    private void Start()
     {
-        // Check if the colliding object is already matched
-        if (matchedObjects.Contains(collision.gameObject))
+        count = 0;
+        UpdateCountText();
+    }
+
+    public void AddToCount()
+    {
+        count++;
+        UpdateCountText();
+        CheckWinCondition();
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        //    foreach (string tag in targetTags)
+        //    {
+        //        if (collision.gameObject.CompareTag(tag))
+        //        {
+        //            OVRGrabbable grabbable1 = collision.gameObject.GetComponent<OVRGrabbable>();
+        //            OVRGrabbable grabbable2 = collision.collider.gameObject.GetComponent<OVRGrabbable>();
+
+        //            if (grabbable1 != null && grabbable1.grabbedBy != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.grabbedBy != null && grabbable2.isGrabbed)
+        //            {
+        //                if (collision.collider.gameObject.CompareTag(tag))
+        //                {
+        //                    Destroy(collision.gameObject);
+        //                    Destroy(collision.collider.gameObject);
+
+        //                    AddToCount();
+
+        //                    AudioSource audioSource = GetComponent<AudioSource>();
+        //                    audioSource.clip = correctMatch;
+        //                    audioSource.Play();
+        //                }
+        //            }
+
+        //            break; // exit the loop if a tag match is found
+        //        }
+        //    }
+
+        foreach (string tag in targetTags)
         {
-            return;
-        }
-
-        // Check if the colliding object matches with any other object
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(tagsToMatch[0]))
-        {
-            if (obj == collision.gameObject || matchedObjects.Contains(obj))
+            if (collision.gameObject.CompareTag(tag))
             {
-                continue;
-            }
+                OVRGrabbable grabbable1 = collision.gameObject.GetComponent<OVRGrabbable>();
+                OVRGrabbable grabbable2 = null;
 
-            if (collision.gameObject.CompareTag(obj.tag))
-            {
-                // Increase the current matches count
-                currentMatches++;
-
-                // Add the matched objects to the list
-                matchedObjects.Add(collision.gameObject);
-                matchedObjects.Add(obj);
-
-                // Destroy the matched objects
-                Destroy(collision.gameObject);
-                Destroy(obj);
-
-                // Check if enough matches have been made
-                if (currentMatches >= matchesNeeded)
+                foreach (ContactPoint contact in collision.contacts)
                 {
-                    // Do something when enough matches have been made
-                    Debug.Log("Matches made!");
-                    currentMatches = 0; // Reset the matches count
-                    matchedObjects.Clear(); // Clear the list of matched objects
+                    if (contact.thisCollider.gameObject.GetComponent<OVRGrabbable>() != null && contact.thisCollider.gameObject.GetComponent<OVRGrabbable>().grabbedBy != null && contact.thisCollider.gameObject.GetComponent<OVRGrabbable>().isGrabbed)
+                    {
+                        grabbable1 = contact.thisCollider.gameObject.GetComponent<OVRGrabbable>();
+                        break;
+                    }
+                    else if (contact.otherCollider.gameObject.GetComponent<OVRGrabbable>() != null && contact.otherCollider.gameObject.GetComponent<OVRGrabbable>().grabbedBy != null && contact.otherCollider.gameObject.GetComponent<OVRGrabbable>().isGrabbed)
+                    {
+                        grabbable2 = contact.otherCollider.gameObject.GetComponent<OVRGrabbable>();
+                        break;
+                    }
                 }
 
-                break;
+                if (grabbable1 != null && grabbable1.grabbedBy != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.grabbedBy != null && grabbable2.isGrabbed)
+                {
+                    Destroy(collision.gameObject);
+                    Destroy(collision.contacts[0].otherCollider.gameObject);
+
+                    AddToCount();
+
+                    AudioSource audioSource = GetComponent<AudioSource>();
+                    audioSource.clip = correctMatch;
+                    audioSource.Play();
+                }
+                Destroy(collision.gameObject);
+                break; // exit the loop if a tag match is found
             }
         }
+    }
+
+    private void CheckWinCondition()
+    {
+        if (count == 1)
+        {
+            SceneManager.LoadScene("WinGame");
+        }
+    }
+
+    private void UpdateCountText()
+    {
+        countText.text = "Count: " + count;
     }
 }
