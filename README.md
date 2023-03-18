@@ -9,9 +9,9 @@ Jelani Garnes (100801696) ~ Programmer / Sound Designer
 &emsp; Skills:  programing, sound design  
 
 **Video Links:**  
+
+Assignment 4:  
   
-Assignment 2:  
-https://www.youtube.com/watch?v=QaZNkVs-NSE  
 
 **Team Leadership:**  
 
@@ -20,7 +20,11 @@ Month 2: Jonathan
 Month 3: Jelani  
 
 **Contributions:**  
-  
+
+Assignment 4:  
+
+All team members contributed equally to the entirety of this project.  
+
 Assignment 2:  
 
 Matthew McPherson: Bodystrom Conductor, Report Writing, Presentation, Persona.  
@@ -32,3 +36,7 @@ Jelani Garmes: Mozilla Hub Prototype, Report Writing, Presentation, Persona, Use
 Assignment 1:  
 
 All team members contributed equally to the entirety of this project.  
+
+**Past Videos**  
+Assignment 2:  
+https://www.youtube.com/watch?v=QaZNkVs-NSE  
