@@ -11,7 +11,10 @@ Jelani Garnes (100801696) ~ Programmer / Sound Designer
 **Video Links:**  
 
 Assignment 4:  
-  
+
+https://www.youtube.com/watch?v=FjuZLSW4648  
+
+All Apendicies are in the Assignment 4 folder.  
 
 **Team Leadership:**  
 
