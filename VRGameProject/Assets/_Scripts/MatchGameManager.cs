@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,26 +10,15 @@ public class MatchGameManager : MonoBehaviour
 {
     public string[] targetTags;
     public AudioClip correctMatch;
-    public AudioClip objectFeedback1;
-    public AudioClip objectFeedback2;
-
-    public TextMeshProUGUI countText;
-    private int count;
+    //public AudioClip objectFeedback1;
+    //public AudioClip objectFeedback2;
 
     private void Start()
     {
-        count = 0;
-        UpdateCountText();
-       
+     
+
     }
 
-    public void AddToCount()
-    {
-        count++;
-        UpdateCountText();
-        CheckWinCondition();
-    }
-    
     private void OnCollisionEnter(Collision collision)
     {
         AudioSource audioSource = GetComponent<AudioSource>();
@@ -37,53 +27,39 @@ public class MatchGameManager : MonoBehaviour
             if (collision.gameObject.CompareTag(tag))
             {
                 OVRGrabbable grabbable1 = collision.gameObject.GetComponent<OVRGrabbable>();
-                OVRGrabbable grabbable2 = null;
+                OVRGrabbable grabbable2 = collision.gameObject.GetComponent<OVRGrabbable>();
 
-                foreach (ContactPoint contact in collision.contacts)
+                if (grabbable1 != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.isGrabbed)
                 {
-                    if (contact.thisCollider.gameObject.GetComponent<OVRGrabbable>() != null && contact.thisCollider.gameObject.GetComponent<OVRGrabbable>().grabbedBy != null && contact.thisCollider.gameObject.GetComponent<OVRGrabbable>().isGrabbed)
-                    {
-                        grabbable1 = contact.thisCollider.gameObject.GetComponent<OVRGrabbable>();
-                        audioSource.clip = objectFeedback1;
-                        audioSource.Play();
-                        break;
-                    }
-                    else if (contact.otherCollider.gameObject.GetComponent<OVRGrabbable>() != null && contact.otherCollider.gameObject.GetComponent<OVRGrabbable>().grabbedBy != null && contact.otherCollider.gameObject.GetComponent<OVRGrabbable>().isGrabbed)
-                    {
-                        grabbable2 = contact.otherCollider.gameObject.GetComponent<OVRGrabbable>();
-                        audioSource.clip = objectFeedback2;
-                        audioSource.Play();
-                        break;
-                    }
-                }
-
-                if (grabbable1 != null && grabbable1.grabbedBy != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.grabbedBy != null && grabbable2.isGrabbed)
-                {
-                    Destroy(collision.gameObject);
-                    Destroy(collision.contacts[0].otherCollider.gameObject);
-
-                    AddToCount();
-
-                   
                     audioSource.clip = correctMatch;
                     audioSource.Play();
+                    Destroy(collision.gameObject);
+                    //Destroy(collision.contacts[0].otherCollider.gameObject);
+                    
+                    Destroy(this.gameObject);
+                    GameObject.Find("GameManager").GetComponent<GameManager>().AddToCount();
                 }
-                Destroy(collision.gameObject);
+                
+
                 break; // exit the loop if a tag match is found
             }
         }
     }
 
-    private void CheckWinCondition()
+    //Update To Do: Play different audio when object is detected.
+    private void OnTriggerEnter(Collider other)
     {
-        if (count == 1)
+        AudioSource audioSource = GetComponent<AudioSource>();
+        OVRGrabbable grabbable1 = other.gameObject.GetComponent<OVRGrabbable>();
+        OVRGrabbable grabbable2 = other.gameObject.GetComponent<OVRGrabbable>();
+        if (grabbable1 != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.isGrabbed)
         {
-            SceneManager.LoadScene("WinGame");
+           
+
         }
+        audioSource.clip = correctMatch;
+        audioSource.Play();
     }
 
-    private void UpdateCountText()
-    {
-        countText.text = "Count: " + count;
-    }
+
 }

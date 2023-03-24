@@ -226,7 +226,7 @@ public class OVRGrabber : MonoBehaviour
             OVRHaptics.LeftChannel.Preempt(hapticsClip);
         }
         else
-        if (m_controller == OVRInput.Controller.RTouch)
+        if(m_controller == OVRInput.Controller.RTouch)
         {
             OVRHaptics.RightChannel.Preempt(hapticsClip);
         }
