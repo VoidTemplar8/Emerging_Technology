@@ -10,8 +10,9 @@ public class MatchGameManager : MonoBehaviour
 {
     public string[] targetTags;
     public AudioClip correctMatch;
-    //public AudioClip objectFeedback1;
-    //public AudioClip objectFeedback2;
+    public AudioClip objectDetected;
+    public AudioClip objectGrabbed;
+    
 
     private void Start()
     {
@@ -54,10 +55,11 @@ public class MatchGameManager : MonoBehaviour
         OVRGrabbable grabbable2 = other.gameObject.GetComponent<OVRGrabbable>();
         if (grabbable1 != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.isGrabbed)
         {
-           
+            audioSource.clip = objectGrabbed;
+            audioSource.Play();
 
         }
-        audioSource.clip = correctMatch;
+        audioSource.clip = objectDetected;
         audioSource.Play();
     }
 
