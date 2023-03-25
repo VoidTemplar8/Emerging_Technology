@@ -30,6 +30,8 @@ public class MatchGameManager : MonoBehaviour
                 OVRGrabbable grabbable1 = collision.gameObject.GetComponent<OVRGrabbable>();
                 OVRGrabbable grabbable2 = collision.gameObject.GetComponent<OVRGrabbable>();
 
+
+
                 if (grabbable1 != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.isGrabbed)
                 {
                     audioSource.clip = correctMatch;
@@ -53,12 +55,17 @@ public class MatchGameManager : MonoBehaviour
         AudioSource audioSource = GetComponent<AudioSource>();
         OVRGrabbable grabbable1 = other.gameObject.GetComponent<OVRGrabbable>();
         OVRGrabbable grabbable2 = other.gameObject.GetComponent<OVRGrabbable>();
-        if (grabbable1 != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.isGrabbed)
+        if (grabbable1 != null && grabbable1.isGrabbed)
+        {
+            audioSource.clip = objectGrabbed;
+            audioSource.Play();         
+        }
+        if(grabbable2 != null && !grabbable2.isGrabbed)
         {
             audioSource.clip = objectGrabbed;
             audioSource.Play();
-
         }
+
         audioSource.clip = objectDetected;
         audioSource.Play();
     }
