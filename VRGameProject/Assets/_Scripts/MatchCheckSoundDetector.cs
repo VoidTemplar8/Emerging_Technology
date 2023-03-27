@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MatchCheckSoundDetector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioClip readyMatch;
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        AudioSource audioSource = GetComponent<AudioSource>();
+        OVRGrabbable grabbable1 = other.gameObject.GetComponent<OVRGrabbable>();
+        OVRGrabbable grabbable2 = other.gameObject.GetComponent<OVRGrabbable>();
+        if (grabbable1 != null && grabbable1.isGrabbed && grabbable2 != null && grabbable2.isGrabbed)
+        {
+            if (other.gameObject.CompareTag("Cube"))
+            {
+                audioSource.clip = readyMatch;
+                audioSource.Play();
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }

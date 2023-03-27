@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cube
   - Ball
+  - MatchSound
   layers:
   - Default
   - TransparentFX
