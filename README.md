@@ -34,7 +34,7 @@ Matthew McPherson: Bodystrom Conductor, Report Writing, Presentation, Persona.
 
 Jonathan Leung: Report Writing, Presentation, Persona.  
 
-Jelani Garmes: Mozilla Hub Prototype, Report Writing, Presentation, Persona, Use Case Diagram.  
+Jelani Garnes: Mozilla Hub Prototype, Report Writing, Presentation, Persona, Use Case Diagram.  
 
 Assignment 1:  
 
