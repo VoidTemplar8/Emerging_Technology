@@ -14,6 +14,10 @@ Month 1: Matthew
 Month 2: Jonathan  
 Month 3: Jelani  
 
+**Final Project APK**  
+
+please download the APK from the releases tab  
+
 **Contributions:**  
 
 Final Project:  
