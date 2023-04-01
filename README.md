@@ -6,15 +6,7 @@ Matthew McPherson (100757379) ~ Designer
 Jonathan Leung (100746578) ~ Digital Artist & 3D Modeler  
 &emsp; Skills: 3D art, Unity  
 Jelani Garnes (100801696) ~ Programmer / Sound Designer  
-&emsp; Skills:  programing, sound design  
-
-**Video Links:**  
-
-Assignment 4:  
-
-https://www.youtube.com/watch?v=FjuZLSW4648  
-
-All Apendicies are in the Assignment 4 folder.  
+&emsp; Skills:  programing, sound design   
 
 **Team Leadership:**  
 
@@ -23,6 +15,14 @@ Month 2: Jonathan
 Month 3: Jelani  
 
 **Contributions:**  
+
+Final Project:  
+
+Matthew McPherson: Game Design, report writing  
+
+Jonathan Leung: Sound Design, report writing  
+
+Jelani Garnes: Programming, report writing  
 
 Assignment 4:  
 
@@ -41,5 +41,9 @@ Assignment 1:
 All team members contributed equally to the entirety of this project.  
 
 **Past Videos**  
+Assignment 4:  
+
+https://www.youtube.com/watch?v=FjuZLSW4648   
+
 Assignment 2:  
 https://www.youtube.com/watch?v=QaZNkVs-NSE  
